@@ -59,17 +59,17 @@ go2rtc:
 
 If subnet routing (`TS_ROUTES`) is approved in the Tailscale Admin Console and `--accept-routes` is enabled on the remote Frigate node, you can also reach the cameras directly by their LAN IPs.
 
-### Option B: Via `balena tunnel` (Works Immediately Without Tailscale)
+### Option B: Via `balena device tunnel` (Works Immediately Without Tailscale)
 
 On the machine running the remote Frigate NVR (or your workstation), open tunnels to the `camfwd` device UUID (`<DEVICE_UUID>`):
 
 ```bash
 # Forward Camera 1 RTSP (:5541), Camera 2 RTSP (:5542), and Camera HTTP UIs (:8081, :8082)
-balena tunnel <DEVICE_UUID> -p 5541:5541 -p 5542:5542 -p 8081:8081 -p 8082:8082
+balena device tunnel <DEVICE_UUID> -p 5541:5541 -p 5542:5542 -p 8081:8081 -p 8082:8082
 ```
 
-Then point your remote Frigate (or VLC / `ffplay`) to:
-- **Camera 1 RTSP:** `rtsp://<user>:<pass>@127.0.0.1:5541/Streaming/Channels/101`
-- **Camera 2 RTSP:** `rtsp://<user>:<pass>@127.0.0.1:5542/Streaming/Channels/101`
-- **Camera 1 HTTP / ISAPI:** `http://127.0.0.1:8081`
-- **Camera 2 HTTP / ISAPI:** `http://127.0.0.1:8082`
+Then point your remote Frigate (or VLC / `ffplay`) to `localhost`:
+- **Camera 1 RTSP:** `rtsp://<user>:<pass>@localhost:5541/Streaming/Channels/101`
+- **Camera 2 RTSP:** `rtsp://<user>:<pass>@localhost:5542/Streaming/Channels/101`
+- **Camera 1 HTTP / ISAPI:** `http://localhost:8081`
+- **Camera 2 HTTP / ISAPI:** `http://localhost:8082`
